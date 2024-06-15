@@ -4,15 +4,19 @@ import numpy as np
 from datetime import datetime
 
 #Tokenize
-from data_tokenizer import train_loader, vocabSize
-vocab = vocabSize
+from data_tokenizer import getData
 max_len_size = 512
 
+
+# Populate Input & Target
+input = []
+target = []
+train_loader, vocabSize = getData(input, target)
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
 model = Encoder(
-    vocab_size=vocab,
+    vocab_size=max_len_size,
     max_len=max_len_size,
     d_k=6,
     d_model=8,

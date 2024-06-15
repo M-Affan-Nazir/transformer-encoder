@@ -34,11 +34,10 @@ def tokenize(input,target):
     random.shuffle(zipped_lists)
     tokenized_texts, target = zip(*zipped_lists)
     tokenized_texts = list(tokenized_texts)
-    target = list(sents)
+    target = list(target)
 
-    return [tokenized_texts, sents, len(dictionary)]
+    return [tokenized_texts, target, len(dictionary)]
 
-tokenized_texts, sents, vocabSize = tokenize()
 
 class TextDataset(Dataset):
     def __init__(self, input_ids, labels):
@@ -66,5 +65,9 @@ def collate_batch(batch):
     return {'input_ids': input_ids_padded, 'attention_mask': attention_masks, 'labels': labels}
 
 
-train_dataset = TextDataset(input_ids=tokenized_texts, labels=sents)
-train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, collate_fn=collate_batch)
+
+def getData(input, target):
+    tokenized_texts, sents, vocabSize = tokenize(input, target)
+    train_dataset = TextDataset(input_ids=tokenized_texts, labels=sents)
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, collate_fn=collate_batch)
+    return train_loader, vocabSize
