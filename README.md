@@ -1,4 +1,4 @@
-# Transformer Encoder Model with Custon Attention Mechanism:
+# Transformer Encoder Model with Custom Attention Mechanism:
 
 the file ('encoder_torch.py') contaiuns the implementation for the Encoder Model. The core feature of this model is it's custom built attention mechanism which is implemented from scratch.
 
